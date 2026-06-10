@@ -9,18 +9,15 @@ export async function POST(req: NextRequest) {
   }
 
   const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
+    host: process.env.SMTP_HOST || 'host.docker.internal',
+    port: 25,
     secure: false,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
+    tls: { rejectUnauthorized: false },
   })
 
   try {
     await transporter.sendMail({
-      from: `"DrLead Contact Form" <${process.env.SMTP_USER}>`,
+      from: '"DrLead Contact Form" <no-reply@drlead.io>',
       to: 'info@drlead.io',
       replyTo: email,
       subject: `New Inquiry from ${name}${company ? ` — ${company}` : ''}`,
