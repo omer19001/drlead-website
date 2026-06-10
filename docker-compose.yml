@@ -1,0 +1,22 @@
+services:
+  drlead-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: drlead-frontend
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: production
+      VIRTUAL_HOST: drlead.io,www.drlead.io
+      VIRTUAL_PORT: 3000
+      LETSENCRYPT_HOST: drlead.io,www.drlead.io
+      LETSENCRYPT_EMAIL: info@drlead.io
+    networks:
+      - proxy-network
+    restart: unless-stopped
+
+networks:
+  proxy-network:
+    external: true
+    name: khabrt-app_default
