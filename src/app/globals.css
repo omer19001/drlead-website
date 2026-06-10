@@ -1,26 +1,247 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
   --font-mono: var(--font-geist-mono);
+
+  /* Brand palette — Gulf Professional Light */
+  --color-brand-primary:   #2563EB;
+  --color-brand-cyan:      #06B6D4;
+  --color-brand-sky:       #38BDF8;
+  --color-brand-navy:      #0F172A;
+  --color-brand-surface:   #FFFFFF;
+  --color-brand-alt:       #F8FAFC;
+  --color-brand-muted:     #64748B;
+  --color-brand-border:    #E2E8F0;
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── Light theme tokens ──────────────────────── */
+:root {
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+  --primary: #2563EB;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F1F5F9;
+  --secondary-foreground: #0F172A;
+  --muted: #F8FAFC;
+  --muted-foreground: #64748B;
+  --accent: #EFF6FF;
+  --accent-foreground: #1D4ED8;
+  --destructive: #EF4444;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #2563EB;
+  --radius: 0.75rem;
+  --sidebar: #F8FAFC;
+  --sidebar-foreground: #0F172A;
+  --sidebar-primary: #2563EB;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EFF6FF;
+  --sidebar-accent-foreground: #0F172A;
+  --sidebar-border: #E2E8F0;
+  --sidebar-ring: #2563EB;
+}
+
+/* ─── Base ────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-heading), system-ui, sans-serif;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    color: #0F172A;
+  }
+  p {
+    text-wrap: pretty;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Animations ──────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 32s linear infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+.animate-float { animation: float 5s ease-in-out infinite; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
+}
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* Animated hero background blobs */
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(40px, -30px) scale(1.08); }
+  66%       { transform: translate(-25px, 20px) scale(0.96); }
+}
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-35px, 25px) scale(0.94); }
+  66%       { transform: translate(30px, -15px) scale(1.06); }
+}
+.animate-blob-1 { animation: blob-drift-1 11s ease-in-out infinite; }
+.animate-blob-2 { animation: blob-drift-2 13s ease-in-out infinite; }
+
+/* Typing dots for AI chat */
+@keyframes typing-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%            { transform: translateY(-4px); opacity: 1; }
+}
+.animate-typing-dot-1 { animation: typing-dot 1.2s ease-in-out infinite; }
+.animate-typing-dot-2 { animation: typing-dot 1.2s ease-in-out 0.2s infinite; }
+.animate-typing-dot-3 { animation: typing-dot 1.2s ease-in-out 0.4s infinite; }
+
+/* Shimmer sweep for feature cards */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* Icon ring ping */
+@keyframes ping-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.animate-ping-ring {
+  animation: ping-ring 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* ─── Utilities ────────────────────────────────── */
+
+/* Gradient text — hero use only, one phrase per section */
+.gradient-text {
+  background: linear-gradient(135deg, #2563EB 0%, #06B6D4 50%, #2563EB 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+@keyframes gradient-shift {
+  0%   { background-position: 0% center; }
+  50%  { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* Surface card — white with subtle shadow */
+.surface-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  transform: translateY(0);
+  transition: box-shadow 250ms cubic-bezier(0.25,1,0.5,1),
+              border-color 250ms cubic-bezier(0.25,1,0.5,1),
+              transform 250ms cubic-bezier(0.25,1,0.5,1);
+}
+.surface-card:hover {
+  border-color: #BFDBFE;
+  box-shadow: 0 8px 28px rgba(37,99,235,0.12), 0 2px 6px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
+}
+
+/* Glass card — max 2 per page (consultation / overlay) */
+.glass-card {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226,232,240,0.8);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+/* Alt section background */
+.section-alt { background: #F8FAFC; }
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+.tabular-nums { font-variant-numeric: tabular-nums; }
+
+/* ─── Blog prose ───────────────────────────────── */
+.prose-dark { color: #475569; }
+.prose-dark h1, .prose-dark h2, .prose-dark h3 { color: #0F172A; }
+.prose-dark a { color: #2563EB; text-underline-offset: 3px; }
+.prose-dark strong { color: #0F172A; }
+.prose-dark code {
+  color: #2563EB;
+  background: #EFF6FF;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+
+/* ─── Reduced motion ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float,
+  .animate-pulse-dot,
+  .animate-blob-1,
+  .animate-blob-2,
+  .animate-typing-dot-1,
+  .animate-typing-dot-2,
+  .animate-typing-dot-3,
+  .animate-ping-ring,
+  .gradient-text {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .surface-card:hover {
+    transform: none;
+  }
 }
