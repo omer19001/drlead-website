@@ -12,14 +12,26 @@ export default function ContactClient() {
     name: '', company: '', email: '', phone: '', message: '',
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`Inquiry from ${form.name}${form.company ? ` — ${form.company}` : ''}`)
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nCompany: ${form.company || 'N/A'}\nEmail: ${form.email}\nPhone: ${form.phone || 'N/A'}\n\nMessage:\n${form.message}`
-    )
-    window.open(`mailto:info@drlead.io?subject=${subject}&body=${body}`)
-    setSubmitted(true)
+    setSending(true)
+    setError('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error('Failed')
+      setSubmitted(true)
+    } catch {
+      setError('Something went wrong. Please try WhatsApp or email us directly.')
+    } finally {
+      setSending(false)
+    }
   }
 
   const contactOptions = [
@@ -224,13 +236,17 @@ export default function ContactClient() {
                       />
                     </div>
 
+                    {error && (
+                      <p className="text-red-600 text-sm text-center">{error}</p>
+                    )}
                     <motion.button
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.99 }}
+                      whileHover={{ scale: sending ? 1 : 1.01 }}
+                      whileTap={{ scale: sending ? 1 : 0.99 }}
                       type="submit"
-                      className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold py-3.5 rounded-xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#2563EB] focus-visible:outline-offset-2"
+                      disabled={sending}
+                      className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3.5 rounded-xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#2563EB] focus-visible:outline-offset-2"
                     >
-                      Send Message
+                      {sending ? 'Sending…' : 'Send Message'}
                     </motion.button>
                   </form>
                 </>
