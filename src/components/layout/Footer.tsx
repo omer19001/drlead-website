@@ -76,10 +76,10 @@ function IconTikTok({ size = 15 }: { size?: number }) {
 
 const socialLinks = [
   { Icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/966582470130' },
-  { Icon: IconInstagram, label: 'Instagram', href: 'https://instagram.com/drlead' },
-  { Icon: IconLinkedIn, label: 'LinkedIn', href: 'https://linkedin.com/company/drlead' },
-  { Icon: IconX, label: 'Twitter/X', href: 'https://twitter.com/drlead' },
-  { Icon: IconTikTok, label: 'TikTok', href: 'https://tiktok.com/@drlead' },
+  { Icon: IconInstagram, label: 'Instagram', href: '#' },
+  { Icon: IconLinkedIn, label: 'LinkedIn', href: '#' },
+  { Icon: IconX, label: 'Twitter/X', href: '#' },
+  { Icon: IconTikTok, label: 'TikTok', href: '#' },
 ]
 
 export default function Footer() {
