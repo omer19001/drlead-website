@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-10T00:00:00.000Z",
+  "title": "Design System: DrLead",
+  "extensions": {
+    "colorMeta": {
+      "navy-base":       { "role": "neutral",   "displayName": "Navy Base",       "canonical": "#0F172A", "tonalRamp": ["#020408","#050c15","#0a1525","#0f172a","#1a2540","#253355","#304270","#3d5290"] },
+      "navy-deep":       { "role": "neutral",   "displayName": "Navy Deep",       "canonical": "#0A0F1E", "tonalRamp": ["#010307","#040810","#070d1a","#0a0f1e","#131b30","#1d2843","#283657","#35456e"] },
+      "surface-elevated":{ "role": "neutral",   "displayName": "Surface Elevated","canonical": "#1E293B", "tonalRamp": ["#070c12","#0d1520","#151f2e","#1e293b","#2a3a53","#374c6b","#465e84","#57729f"] },
+      "blue-primary":    { "role": "primary",   "displayName": "Gulf Blue",       "canonical": "#2563EB", "tonalRamp": ["#0a1a4d","#0d2266","#1133a0","#2563eb","#4b80f0","#7aa0f4","#a9c1f8","#d4e1fc"] },
+      "cyan-accent":     { "role": "secondary", "displayName": "Cyan Reach",      "canonical": "#06B6D4", "tonalRamp": ["#022030","#033646","#04596d","#06b6d4","#1ecfed","#5dd9f2","#92e6f6","#c5f3fb"] },
+      "sky-highlight":   { "role": "tertiary",  "displayName": "Sky Pulse",       "canonical": "#38BDF8", "tonalRamp": ["#062330","#0a3a50","#1567a0","#38bdf8","#63ccfa","#8dd9fb","#b4e6fd","#d9f3fe"] },
+      "muted-slate":     { "role": "neutral",   "displayName": "Muted Slate",     "canonical": "#64748B", "tonalRamp": ["#1a1e25","#252c38","#384252","#64748b","#8494aa","#a4b0c4","#c3cbda","#e1e5ef"] },
+      "offwhite":        { "role": "neutral",   "displayName": "Offwhite",        "canonical": "#F8FAFC", "tonalRamp": ["#0f172a","#1e293b","#475569","#94a3b8","#cbd5e1","#e2e8f0","#f1f5f9","#f8fafc"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Hero headlines. One per page. The phrase that receives gradient text is always Display size." },
+      "headline": { "displayName": "Headline", "purpose": "Section H2 titles. Never more than two lines." },
+      "title":    { "displayName": "Title",    "purpose": "Card headings, feature names, H3 elements." },
+      "body":     { "displayName": "Body",     "purpose": "All descriptive copy. Always Muted Slate (#64748B) on dark backgrounds. Max 65ch." },
+      "label":    { "displayName": "Label",    "purpose": "Badges, stat labels, nav text, eyebrows. Uppercase + wide tracking signals metadata." }
+    },
+    "shadows": [
+      { "name": "accent-glow",  "value": "0 0 40px rgba(37,99,235,0.10)",   "purpose": "Interactive card hover state only. Never at rest." },
+      { "name": "hero-shadow",  "value": "0 25px 50px rgba(0,0,0,0.25)",    "purpose": "Device mockups and floating dashboard previews only." }
+    ],
+    "motion": [
+      { "name": "ease-out-quart", "value": "cubic-bezier(0.25, 1, 0.5, 1)", "purpose": "Default easing for all entrances (fadeUp, scaleIn, slideIn)." },
+      { "name": "fade-up",        "value": "opacity 0→1, translateY 24px→0, duration 500ms", "purpose": "Section content reveal on scroll (whileInView)." },
+      { "name": "stagger-child",  "value": "100ms delay between siblings",   "purpose": "Card grids and feature lists. Parent uses stagger variant." },
+      { "name": "hover-scale",    "value": "scale(1.02), duration 200ms",    "purpose": "Primary buttons on hover. Never more than 1.02." }
+    ],
+    "breakpoints": [
+      { "name": "sm",  "value": "640px" },
+      { "name": "md",  "value": "768px" },
+      { "name": "lg",  "value": "1024px" },
+      { "name": "xl",  "value": "1280px" },
+      { "name": "2xl", "value": "1536px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main CTA. Always paired with a ghost button for secondary action.",
+      "html": "<button class=\"ds-btn-primary\"><span>Start Free Trial</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #2563EB; color: #ffffff; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; padding: 14px 28px; border-radius: 12px; border: none; cursor: pointer; transition: background 200ms ease, transform 200ms ease; } .ds-btn-primary:hover { background: #3B82F6; transform: scale(1.02); } .ds-btn-primary:focus-visible { outline: 2px solid #2563EB; outline-offset: 2px; } .ds-btn-primary:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action. Always appears alongside a primary button, never alone.",
+      "html": "<button class=\"ds-btn-ghost\">Schedule Demo</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #F8FAFC; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; padding: 14px 28px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.10); cursor: pointer; transition: background 200ms ease, border-color 200ms ease, transform 200ms ease; } .ds-btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.18); transform: scale(1.02); } .ds-btn-ghost:focus-visible { outline: 2px solid #2563EB; outline-offset: 2px; }"
+    },
+    {
+      "name": "Badge / Chip",
+      "kind": "chip",
+      "refersTo": "badge-default",
+      "description": "Section eyebrow, category label. Pill shape. Uppercase label size.",
+      "html": "<span class=\"ds-badge\">🤖 AI-Powered CRM Platform</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(37,99,235,0.10); border: 1px solid rgba(37,99,235,0.20); color: #38BDF8; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.75rem; font-weight: 500; padding: 6px 14px; border-radius: 9999px; letter-spacing: 0.02em; }"
+    },
+    {
+      "name": "Surface Card",
+      "kind": "card",
+      "refersTo": "card-surface",
+      "description": "Default card for feature grids, testimonials, pricing. Never nest cards.",
+      "html": "<div class=\"ds-card-surface\"><div class=\"ds-card-icon\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#60A5FA\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 12h-4l-3 9L9 3l-3 9H2\"/></svg></div><h3 class=\"ds-card-title\">Lead Management</h3><p class=\"ds-card-body\">Capture and organize leads from websites, forms, ads, WhatsApp, and social media.</p></div>",
+      "css": ".ds-card-surface { background: #1E293B; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 24px; transition: border-color 300ms ease, box-shadow 300ms ease; } .ds-card-surface:hover { border-color: rgba(37,99,235,0.30); box-shadow: 0 0 40px rgba(37,99,235,0.10); } .ds-card-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(37,99,235,0.10); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; } .ds-card-title { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 1.125rem; font-weight: 700; color: #F8FAFC; letter-spacing: -0.01em; margin: 0 0 8px; } .ds-card-body { font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.875rem; color: #64748B; line-height: 1.7; margin: 0; }"
+    },
+    {
+      "name": "Glass Card",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "Overlay content, consultation forms, AI panels. Max 2 per page.",
+      "html": "<div class=\"ds-card-glass\"><h3 class=\"ds-card-title\">Ready to get started?</h3><p class=\"ds-card-body\">Choose how you'd like to connect with our team</p></div>",
+      "css": ".ds-card-glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 32px; } .ds-card-glass .ds-card-title { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 1.25rem; font-weight: 700; color: #F8FAFC; letter-spacing: -0.01em; margin: 0 0 8px; } .ds-card-glass .ds-card-body { font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.875rem; color: #64748B; line-height: 1.6; margin: 0; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "description": "Form fields. Consistent across contact forms and newsletter inputs.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-label\">Full Name</label><input class=\"ds-input\" type=\"text\" placeholder=\"Ahmed Al-Rashidi\" /></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; } .ds-label { font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.75rem; font-weight: 500; color: #64748B; } .ds-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px; padding: 10px 16px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.875rem; color: #F8FAFC; outline: none; transition: border-color 200ms ease; width: 100%; box-sizing: border-box; } .ds-input::placeholder { color: #475569; } .ds-input:focus { border-color: rgba(37,99,235,0.50); } .ds-input:disabled { opacity: 0.4; cursor: not-allowed; }"
+    },
+    {
+      "name": "Navigation Header",
+      "kind": "nav",
+      "description": "Sticky top header. Transparent at top, blurred dark on scroll.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-logo\" href=\"/\"><div class=\"ds-logo-mark\">Dr</div><span class=\"ds-logo-text\">Dr<span class=\"ds-logo-accent\">Lead</span></span></a><nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"/platform\">Platform</a><a class=\"ds-nav-link\" href=\"/pricing\">Pricing</a></nav><div class=\"ds-header-cta\"><button class=\"ds-btn-ghost\" style=\"padding:8px 16px;font-size:0.875rem\">Login</button><button class=\"ds-btn-primary\" style=\"padding:8px 16px;font-size:0.875rem\">Start Free Trial</button></div></header>",
+      "css": ".ds-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; background: rgba(15,23,42,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); } .ds-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; } .ds-logo-mark { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #2563EB, #06B6D4); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.8125rem; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; } .ds-logo-text { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-weight: 700; font-size: 1.125rem; color: #F8FAFC; } .ds-logo-accent { color: #38BDF8; } .ds-nav { display: flex; align-items: center; gap: 4px; } .ds-nav-link { padding: 8px 16px; border-radius: 8px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; color: #64748B; text-decoration: none; transition: color 150ms, background 150ms; } .ds-nav-link:hover { color: #F8FAFC; background: rgba(255,255,255,0.05); } .ds-header-cta { display: flex; align-items: center; gap: 12px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Gulf Control Room",
+    "overview": "DrLead's design language is built around a single image: a serious decision-maker in Riyadh or Dubai, glancing at a dashboard at 9am before their first client call. The interface should feel like it was made for that person — not a startup founder in San Francisco. Everything is dark, information-dense, and precise. No decoration earns its place unless it communicates something. Confidence comes from clarity, not from animation.\n\nThe system rejects three specific failure modes: generic SaaS cream, aggressive sales-funnel tactics, and corporate enterprise cold. The Gulf Control Room is none of those things. It is purposeful darkness — the kind you find in Bloomberg terminals and Stripe dashboards, not in crypto projects or AI-hype landing pages.\n\nColor is restrained but committed. Two accent colors work as a gradient pair (blue → cyan) and almost never appear separately. The dark surface hierarchy does the structural work. Motion is orchestrated but never decorative.",
+    "keyCharacteristics": [
+      "Dark-first, always",
+      "Two-color accent system (blue + cyan) used exclusively as a gradient pair",
+      "Tonal elevation — depth from layered surfaces, not shadows",
+      "Typography is the loudest design element",
+      "Gulf-aware through content and structure, never through decorative motifs"
+    ],
+    "rules": [
+      { "name": "The One Gradient Rule",    "body": "The blue→cyan gradient is the brand's single visual signature. It never appears as a background on large surfaces, never with a third color, and cyan is never used without blue.", "section": "colors" },
+      { "name": "The Surface Staircase Rule","body": "Depth is expressed through four surfaces only: #0A0F1E → #0F172A → #1E293B → rgba(255,255,255,0.05). No other background values are permitted.", "section": "colors" },
+      { "name": "The Tight Heading Rule",   "body": "Every heading gets letter-spacing: -0.02em. Loose-tracked headings at large sizes feel amateurish.", "section": "typography" },
+      { "name": "The Muted Body Rule",      "body": "Body text on dark backgrounds is always #64748B, not white. Reserve Offwhite for headings and short UI labels only.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "All surfaces are flat at rest. Glow appears only on hover for interactive cards. Shadow appears only on device mockups.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use the two-step dark background alternation (#0A0F1E ↔ #0F172A) to create visual rhythm between sections",
+      "Do use Muted Slate (#64748B) for all body text on dark backgrounds",
+      "Do apply letter-spacing: -0.02em to every heading at Title size and above",
+      "Do use the blue→cyan gradient exclusively as a pair",
+      "Do keep CTAs paired: one primary + one ghost. Never more than two primary buttons in the same visual group",
+      "Do respect prefers-reduced-motion",
+      "Do cap body copy at 65ch per line",
+      "Do maintain WCAG AA contrast ratios"
+    ],
+    "donts": [
+      "Don't use white or light-gray backgrounds as a default",
+      "Don't use border-left or border-right greater than 1px as a colored accent stripe on cards",
+      "Don't make the site look like generic SaaS cream",
+      "Don't use aggressive sales-funnel patterns: countdown timers, fake scarcity, more than two CTAs in the same visual group",
+      "Don't use corporate enterprise cold aesthetics — stock photography, navy + gold, IBM-circa-2010 stiffness",
+      "Don't add glassmorphism as a default card style — maximum two glass cards per page",
+      "Don't apply the gradient to body text, button labels, or any text shorter than a full headline phrase",
+      "Don't use more than four identical cards in a grid with the same icon + heading + text structure",
+      "Don't animate layout properties (width, height, margin, padding)",
+      "Don't add shadows to cards at rest"
+    ]
+  }
+}

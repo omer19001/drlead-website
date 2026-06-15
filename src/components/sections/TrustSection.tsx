@@ -2,7 +2,16 @@
 
 import { motion } from 'framer-motion'
 import { Shield, Award, Lock } from 'lucide-react'
-import { stagger, fadeUp } from '@/lib/animations'
+
+const expo = [0.16, 1, 0.3, 1] as const
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+}
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: expo } },
+}
 
 function WhatsAppIcon({ size = 18 }: { size?: number }) {
   return (
@@ -14,78 +23,67 @@ function WhatsAppIcon({ size = 18 }: { size?: number }) {
 }
 
 const certifications = [
-  {
-    Icon: Shield,
-    title: 'ISO 27001 Certified',
-    description: 'Information Security Management',
-  },
-  {
-    Icon: Award,
-    title: 'Gulf Innovation Award',
-    description: 'Excellence in AI Solutions 2024',
-  },
-  {
-    Icon: WhatsAppIcon,
-    title: 'WhatsApp Business Partner',
-    description: 'Official Meta Integration Partner',
-  },
-  {
-    Icon: Lock,
-    title: 'Enterprise Security',
-    description: 'Bank-level data protection',
-  },
+  { Icon: Shield,       title: 'ISO 27001 Certified',       description: 'Information Security Management', color: '#2563EB' },
+  { Icon: Award,        title: 'Innovation Award',           description: 'Excellence in AI Solutions 2024', color: '#F59E0B' },
+  { Icon: WhatsAppIcon, title: 'WhatsApp Business Partner',  description: 'Official Meta Integration Partner', color: '#25D366' },
+  { Icon: Lock,         title: 'Enterprise Security',        description: 'Bank-level data protection', color: '#8B5CF6' },
 ]
 
 const guarantees = [
-  { title: '30-Day Money Back', description: 'Full refund if not satisfied', symbol: '↩' },
-  { title: '99.9% Uptime SLA', description: 'Guaranteed system availability', symbol: '⚡' },
-  { title: 'Free Updates & Support', description: 'Lifetime technical assistance', symbol: '∞' },
-  { title: 'Your Data, Protected', description: 'We never share or sell your data', symbol: '🔒' },
+  { title: '30-Day Money Back', description: 'Full refund if not satisfied', symbol: '↩', color: '#2563EB' },
+  { title: '99.9% Uptime SLA',  description: 'Guaranteed system availability', symbol: '⚡', color: '#F59E0B' },
+  { title: 'Free Updates',       description: 'Lifetime technical assistance', symbol: '∞', color: '#06B6D4' },
+  { title: 'Data Protected',     description: 'We never share or sell your data', symbol: '🔒', color: '#8B5CF6' },
 ]
 
 export default function TrustSection() {
   return (
-    <section className="section-alt py-28 border-y border-[#E2E8F0]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#0A0F1E] py-28 relative overflow-hidden">
+      <div aria-hidden className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle, #334155 1px, transparent 1px)', backgroundSize: '36px 36px' }} />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          variants={stagger}
+          variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
           className="text-center mb-16 max-w-2xl mx-auto"
         >
-          <motion.p variants={fadeUp} className="text-[#2563EB] text-xs font-semibold tracking-[0.12em] uppercase mb-4">
+          <motion.p variants={item} className="text-[#38BDF8] text-xs font-semibold tracking-[0.14em] uppercase mb-4">
             Trust & Security
           </motion.p>
           <motion.h2
-            variants={fadeUp}
-            className="text-3xl md:text-5xl font-bold text-[#0F172A]"
-            style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em' }}
+            variants={item}
+            className="text-3xl md:text-5xl font-bold text-[#F8FAFC]"
+            style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.022em' }}
           >
             A Partner Built for{' '}
-            <span className="gradient-text">Long-Term Success</span>
+            <span className="hero-gradient-text">Long-Term Success</span>
           </motion.h2>
         </motion.div>
 
         {/* Certifications */}
         <motion.div
-          variants={stagger}
+          variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5"
         >
           {certifications.map((cert) => (
             <motion.div
               key={cert.title}
-              variants={fadeUp}
-              className="surface-card rounded-2xl p-5 flex items-start gap-3"
+              variants={item}
+              className="dark-card rounded-2xl p-5 flex items-start gap-3"
             >
-              <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] flex items-center justify-center flex-shrink-0 text-[#2563EB]">
+              <div
+                className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ background: `${cert.color}18`, color: cert.color }}
+              >
                 <cert.Icon size={18} />
               </div>
               <div>
-                <p className="text-[#0F172A] font-semibold text-sm mb-0.5" style={{ fontFamily: 'var(--font-heading)' }}>
+                <p className="text-[#E2E8F0] font-semibold text-sm mb-0.5" style={{ fontFamily: 'var(--font-heading)' }}>
                   {cert.title}
                 </p>
                 <p className="text-[#64748B] text-xs leading-relaxed">{cert.description}</p>
@@ -96,7 +94,7 @@ export default function TrustSection() {
 
         {/* Guarantees */}
         <motion.div
-          variants={stagger}
+          variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
@@ -105,16 +103,17 @@ export default function TrustSection() {
           {guarantees.map((g) => (
             <motion.div
               key={g.title}
-              variants={fadeUp}
-              className="surface-card rounded-2xl p-5 text-center"
+              variants={item}
+              className="dark-card rounded-2xl p-5 text-center"
             >
               <div
-                className="w-10 h-10 rounded-xl bg-[#EFF6FF] flex items-center justify-center text-[#2563EB] text-lg font-bold mx-auto mb-3"
+                className="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold mx-auto mb-3"
+                style={{ background: `${g.color}18`, color: g.color }}
                 aria-hidden
               >
                 {g.symbol}
               </div>
-              <h4 className="text-[#0F172A] font-semibold text-sm mb-1">{g.title}</h4>
+              <h4 className="text-[#E2E8F0] font-semibold text-sm mb-1">{g.title}</h4>
               <p className="text-[#64748B] text-xs">{g.description}</p>
             </motion.div>
           ))}

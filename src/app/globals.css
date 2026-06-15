@@ -99,7 +99,6 @@
     font-family: var(--font-heading), system-ui, sans-serif;
     letter-spacing: -0.02em;
     text-wrap: balance;
-    color: #0F172A;
   }
   p {
     text-wrap: pretty;
@@ -226,6 +225,51 @@
   font-size: 0.875em;
 }
 
+/* ─── Dark hero orb animations ─────────────────── */
+@keyframes orb-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(60px, -40px) scale(1.12); }
+  66%       { transform: translate(-40px, 30px) scale(0.92); }
+}
+@keyframes orb-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-55px, 38px) scale(0.90); }
+  66%       { transform: translate(45px, -28px) scale(1.10); }
+}
+@keyframes orb-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(35px, -55px) scale(1.08); }
+}
+.animate-orb-1 { animation: orb-drift-1 18s ease-in-out infinite; }
+.animate-orb-2 { animation: orb-drift-2 22s ease-in-out infinite; }
+.animate-orb-3 { animation: orb-drift-3 16s ease-in-out infinite; }
+
+/* Hero gradient text — for dark backgrounds */
+.hero-gradient-text {
+  background: linear-gradient(135deg, #60A5FA 0%, #06B6D4 45%, #818CF8 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 5s ease-in-out infinite;
+}
+
+/* Dark surface card */
+.dark-card {
+  background: #0F172A;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 1rem;
+  transition:
+    border-color 220ms cubic-bezier(0.25,1,0.5,1),
+    transform 220ms cubic-bezier(0.25,1,0.5,1),
+    box-shadow 220ms cubic-bezier(0.25,1,0.5,1);
+}
+.dark-card:hover {
+  border-color: rgba(37,99,235,0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(37,99,235,0.1);
+}
+
 /* ─── Reduced motion ───────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
@@ -237,11 +281,16 @@
   .animate-typing-dot-2,
   .animate-typing-dot-3,
   .animate-ping-ring,
-  .gradient-text {
+  .animate-orb-1,
+  .animate-orb-2,
+  .animate-orb-3,
+  .gradient-text,
+  .hero-gradient-text {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
-  .surface-card:hover {
+  .surface-card:hover,
+  .dark-card:hover {
     transform: none;
   }
 }
